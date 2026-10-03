@@ -151,11 +151,11 @@ public final class Util {
         double dx = point.x - eye.x, dy = point.y - eye.y, dz = point.z - eye.z;
         float yaw = (float) (Math.toDegrees(Math.atan2(dz, dx)) - 90.0);
         float pitch = (float) -Math.toDegrees(Math.atan2(dy, Math.hypot(dx, dz)));
-        mc.getNetworkHandler().sendPacket(
+                mc.getNetworkHandler().sendPacket(new PlayerMoveC2SPacket.LookAndOnGround(
                 yaw, MathHelper.clamp(pitch, -90f, 90f), p.isOnGround(), p.horizontalCollision));
         action.run();
         if (Config.I.silentAimRestore) {
-            mc.getNetworkHandler().sendPacket(
+            mc.getNetworkHandler().sendPacket(new PlayerMoveC2SPacket.LookAndOnGround(
                     p.getYaw(), p.getPitch(), p.isOnGround(), p.horizontalCollision));
         }
     }
