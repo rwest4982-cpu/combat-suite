@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "combatsuite",
+  "version": "${version}",
+  "name": "Combat Suite",
+  "description": "Singleplayer combat automation: Trigger Bot, Silent Aim, Stun Web and Head Web, with a tabbed config screen.",
+  "authors": ["You"],
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "client": ["dev.combatsuite.CombatSuite"],
+    "modmenu": ["dev.combatsuite.gui.ModMenuIntegration"]
+  },
+  "depends": {
+    "fabricloader": ">=0.19.0",
+    "minecraft": "~1.21.11",
+    "java": ">=21",
+    "fabric-api": "*"
+  },
+  "suggests": {
+    "modmenu": "*"
+  }
+}
