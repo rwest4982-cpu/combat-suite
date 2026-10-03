@@ -7,7 +7,7 @@ import net.minecraft.block.FallingBlock;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.world.ClientWorld;
-import net.minecraft.entity.Angerable;
+import net.minecraft.entity.mob.Angerable;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.decoration.ArmorStandEntity;
@@ -40,7 +40,7 @@ public final class Util {
         return mc.player != null
                 && mc.world != null
                 && mc.interactionManager != null
-                && mc.networkHandler != null
+                && mc.getNetworkHandler() != null
                 && mc.isInSingleplayer()
                 && mc.currentScreen == null
                 && !mc.player.isSpectator();
@@ -151,11 +151,11 @@ public final class Util {
         double dx = point.x - eye.x, dy = point.y - eye.y, dz = point.z - eye.z;
         float yaw = (float) (Math.toDegrees(Math.atan2(dz, dx)) - 90.0);
         float pitch = (float) -Math.toDegrees(Math.atan2(dy, Math.hypot(dx, dz)));
-        mc.networkHandler.sendPacket(new PlayerMoveC2SPacket.LookAndOnGround(
+        mc.getNetworkHandler().sendPacket(
                 yaw, MathHelper.clamp(pitch, -90f, 90f), p.isOnGround(), p.horizontalCollision));
         action.run();
         if (Config.I.silentAimRestore) {
-            mc.networkHandler.sendPacket(new PlayerMoveC2SPacket.LookAndOnGround(
+            mc.getNetworkHandler().sendPacket(
                     p.getYaw(), p.getPitch(), p.isOnGround(), p.horizontalCollision));
         }
     }
